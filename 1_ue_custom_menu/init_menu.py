@@ -1,20 +1,7 @@
 import unreal
 
 
-# -----------------
-# create: level from files
-# create: level from name
-
-# select: RenderQueueConfig // apply to: all items in RenderQueue
-# select: Camera // apply settings from Houdini file
-
-
-
 def create_menu():
-    # ------------- backup
-    # custom_menu = ue_main_menu.add_sub_menu("My.Menu", "Python", "My Menu", "This is a IKOON")
-    # insert_position = unreal.ToolMenuInsert("", unreal.ToolMenuInsertType.FIRST)
-    # https://docs.unrealengine.com/4.26/en-US/PythonAPI/class/ToolMenuInsertType.html
 
     entry_names    = []
     entry_labels   = []
@@ -23,26 +10,31 @@ def create_menu():
 
     # ---------
 
-    entry_names.append(       "IKOON_MyCommandName_A")
-    entry_labels.append(      "IKOON_label_A")
-    entry_tooltips.append(    "IKOON_tooltip_A")
+    entry_names.append(       "create_levels")
+    entry_tooltips.append(    "help:")
+    entry_labels.append(      "create levels (from files)")
     entry_commands.append(    "import commands; import importlib; importlib.reload(commands); commands.printa()")
 
     # ---------
 
-    entry_names.append(       "IKOON_MyCommandName_B")
-    entry_labels.append(      "IKOON_label_B")
-    entry_tooltips.append(    "IKOON_tooltip_B")
-    entry_commands.append(    "print ('foo_B')")
+    entry_names.append(       "camera_settings")
+    entry_tooltips.append(    "select in outliner: Camera       (applies settings from Houdini file)")
+    entry_labels.append(      "camera settings (from file)")
+    entry_commands.append(    "import ue_camera; import importlib; importlib.reload(ue_camera); ue_camera.apply_settings()")
 
     # ---------
 
-    entry_names.append(       "IKOON_MyCommandName_C")
-    entry_labels.append(      "IKOON_label_C")
-    entry_tooltips.append(    "IKOON_tooltip_C")
+    entry_names.append(       "render_job_settings")
+    entry_tooltips.append(    "select in outliner: RenderQueueConfig           (applies to: all items in RenderQueue // file has to be here:")
+    entry_labels.append(      "render job settings (from file)")
     entry_commands.append(    "print ('foo_C')")
 
-    # ---------
+
+
+    # ------------- backup
+    # custom_menu = ue_main_menu.add_sub_menu("My.Menu", "Python", "My Menu", "This is a IKOON")
+    # insert_position = unreal.ToolMenuInsert("", unreal.ToolMenuInsertType.FIRST)
+    # https://docs.unrealengine.com/4.26/en-US/PythonAPI/class/ToolMenuInsertType.html
 
     ue_menus  = unreal.ToolMenus.get()
     ue_main_menu = ue_menus.find_menu("LevelEditor.MainMenu")
