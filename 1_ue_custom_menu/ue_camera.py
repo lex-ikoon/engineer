@@ -3,6 +3,14 @@ import unreal
 
 
 def update_camera_settings() :
+
+    # resolution_x      = 150
+    # resolution_y      = 150
+    # frame_range_start = 1
+    # frame_range_start = 150
+    # fps               = 30
+
+
        
     eas = unreal.get_editor_subsystem(unreal.EditorActorSubsystem)
     a = eas.get_selected_level_actors()
