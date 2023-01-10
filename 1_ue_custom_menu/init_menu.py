@@ -11,23 +11,23 @@ def create_menu():
     # ---------
 
     entry_names.append(       "create_levels")
-    entry_tooltips.append(    "help:")
-    entry_labels.append(      "create levels (from files)")
-    entry_commands.append(    "import commands; import importlib; importlib.reload(commands); commands.printa()")
+    entry_tooltips.append(    "houdini filemarks should be here: Q:/_engine/_json/create")
+    entry_labels.append(      "create levels")
+    entry_commands.append(    "import ue_level; import importlib; importlib.reload(ue_level); ue_level.find_filemarks_to_create_levels()")
 
     # ---------
 
     entry_names.append(       "camera_settings")
     entry_tooltips.append(    "select in outliner: Camera       (applies settings from Houdini file)")
-    entry_labels.append(      "camera settings (from file)")
-    entry_commands.append(    "import ue_camera; import importlib; importlib.reload(ue_camera); ue_camera.apply_settings()")
+    entry_labels.append(      "update camera settings")
+    entry_commands.append(    "import ue_camera; import importlib; importlib.reload(ue_camera); ue_camera.update_camera_settings()")
 
     # ---------
 
     entry_names.append(       "render_job_settings")
     entry_tooltips.append(    "select in outliner: RenderQueueConfig           (applies to: all items in RenderQueue // file has to be here:")
-    entry_labels.append(      "render job settings (from file)")
-    entry_commands.append(    "print ('foo_C')")
+    entry_labels.append(      "apply render job settings")
+    entry_commands.append(    "import ue_render_job; import importlib; importlib.reload(ue_render_job); ue_render_job.apply_selected_RenderQueueConfig()")
 
 
 

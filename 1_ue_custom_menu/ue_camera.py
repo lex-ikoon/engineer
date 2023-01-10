@@ -1,18 +1,8 @@
 import unreal
 
-import wf_job_archetype_data ; node = kwargs["node"] ; wf_job_archetype_data.job_data_rename(node)
 
 
-def create_camera() :
-    actor_class = unreal.CineCameraActor
-    actor_location = unreal.Vector(0.0,0.0,0.0)
-    actor_rotation = unreal.Rotator(0.0,0.0,0.0)
-    _spawnedActor = unreal.EditorLevelLibrary.spawn_actor_from_class(actor_class, actor_location, actor_rotation)
-    pass
-
-
-
-def apply_settings() :
+def update_camera_settings() :
        
     eas = unreal.get_editor_subsystem(unreal.EditorActorSubsystem)
     a = eas.get_selected_level_actors()

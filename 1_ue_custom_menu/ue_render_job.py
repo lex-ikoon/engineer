@@ -26,9 +26,7 @@ if not unreal.EditorAssetLibrary.does_asset_exist(path+name):
 
 
 
-
-
-def ue_apply_selected_RenderQueueConfig():
+def apply_selected_RenderQueueConfig():
     # -------------------------------------
     # asset should be selected
     config_asset = unreal.load_asset( "/Game/JPG" )
