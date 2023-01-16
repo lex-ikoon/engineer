@@ -142,6 +142,7 @@ def create_level(hip_name, job_name) :
     # ------------  camera settings ------------
 
 
+
     cine_cam_component = spawned_cam.get_cine_camera_component()
 
 
@@ -153,11 +154,19 @@ def create_level(hip_name, job_name) :
     focus_settings.focus_offset          = 0.0
     focus_settings.manual_focus_distance = focus_distance
 
+    # apply
     cine_cam_component.set_editor_property("focus_settings",focus_settings)
 
 
-    # -------  sensor --------
+    # -------  max focal length --------
+    lens_settings = unreal.CameraLensSettings()
+    lens_settings.max_focal_length = 20000
 
+    # apply
+    cine_cam_component.set_editor_property("lens_settings",lens_settings)
+
+
+    # -------  sensor --------
     cine_cam_component.filmback.sensor_width  = resx
     cine_cam_component.filmback.sensor_height = resy
     cine_cam_component.current_focal_length   = focal_length
