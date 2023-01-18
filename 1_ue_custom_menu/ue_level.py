@@ -1,7 +1,7 @@
 import os
 import json
 import unreal
-
+import importlib
 
 
 def find_filemarks_to_create_levels() :
@@ -81,10 +81,10 @@ def create_level(hip_name, job_name) :
 
     # ------------  spawn sequencer -----------
 
-    object_seq   = unreal.load_asset(path_seq)
+    asset_seq    = unreal.load_asset(path_seq)
     location_seq = unreal.Vector(100, 100, 100)
     rotation_seq = unreal.Rotator(0.0, 0.0, 0.0)
-    spawned_seq  = unreal.EditorLevelLibrary.spawn_actor_from_object(object_seq, location_seq, rotation_seq)
+    spawned_seq  = unreal.EditorLevelLibrary.spawn_actor_from_object(asset_seq, location_seq, rotation_seq)
 
 
 
@@ -119,13 +119,12 @@ def create_level(hip_name, job_name) :
 
     read_file.close()
 
-
     # ------------  sequencer settings ---------
 
     frame_rate = unreal.FrameRate(numerator = fps, denominator = 1)
-    object_seq.set_display_rate(   frame_rate)
-    object_seq.set_playback_start( rangex)
-    object_seq.set_playback_end(   rangey)
+    asset_seq.set_display_rate(   frame_rate)
+    asset_seq.set_playback_start( rangex)
+    asset_seq.set_playback_end(   rangey)
 
 
     # ------------  spawn cam ----------------
@@ -134,48 +133,30 @@ def create_level(hip_name, job_name) :
     location_cam = unreal.Vector( tx,ty,tz)
     rotation_cam = unreal.Rotator(rx,ry,rz)
     spawned_cam  = unreal.EditorLevelLibrary.spawn_actor_from_class(class_cam, location_cam, rotation_cam)
-
+    spawned_cam.set_actor_label(job_name + "_CAM", mark_dirty=True)
 
 
 
     #-------------------------------------------
     # ------------  camera settings ------------
 
-
-
     cine_cam_component = spawned_cam.get_cine_camera_component()
-
-
-    # -------  focus --------
-
-    focus_settings                       = unreal.CameraFocusSettings()
-    focus_settings.focus_method          = unreal.CameraFocusMethod.MANUAL
-    focus_settings.smooth_focus_changes  = False
-    focus_settings.focus_offset          = 0.0
-    focus_settings.manual_focus_distance = focus_distance
-
-    # apply
-    cine_cam_component.set_editor_property("focus_settings",focus_settings)
-
-
-    # -------  max focal length --------
-    lens_settings = unreal.CameraLensSettings()
-    lens_settings.max_focal_length = 20000
-
-    # apply
-    cine_cam_component.set_editor_property("lens_settings",lens_settings)
-
-
-    # -------  sensor --------
-    cine_cam_component.filmback.sensor_width  = resx
-    cine_cam_component.filmback.sensor_height = resy
-    cine_cam_component.current_focal_length   = focal_length
 
     # -------  tags   --------
     cine_cam_component.component_tags = [json_path]
+    # asset_lev.component_tags = [json_path]
+
+    import ue_camera
+    importlib.reload(ue_camera)
+
+    ue_camera.update_camera_settings(cine_cam_component)
 
     #-------------------------------------------
+    #-------------------------------------------
 
+    # add cam to sequencer
+    # actor = unreal.EditorLevelLibrary.get_selected_level_actors()[0]
+    # actor_binding = asset_seq.add_possessable(spawned_cam)
 
 
     # ------------  save everything (again) -------

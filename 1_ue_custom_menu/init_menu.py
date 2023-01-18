@@ -18,14 +18,14 @@ def create_menu():
     # ---------
 
     entry_names.append(       "camera_settings")
-    entry_tooltips.append(    "select in outliner: Camera       (applies settings from Houdini file)")
+    entry_tooltips.append(    "select in outliner: _CAM (Camera)           (applies settings from Houdini file)")
     entry_labels.append(      "update camera settings")
-    entry_commands.append(    "import ue_camera; import importlib; importlib.reload(ue_camera); ue_camera.update_camera_settings()")
+    entry_commands.append(    "import ue_camera; import importlib; importlib.reload(ue_camera); ue_camera.update_camera_settings('MENU')")
 
     # ---------
 
     entry_names.append(       "render_job_settings")
-    entry_tooltips.append(    "select in outliner: RenderQueueConfig           (applies to: all items in RenderQueue // file has to be here:")
+    entry_tooltips.append(    "select in outliner: _CONFIG (RenderQueueConfig)           (applies to: all items in RenderQueue")
     entry_labels.append(      "apply render job settings")
     entry_commands.append(    "import ue_render_job; import importlib; importlib.reload(ue_render_job); ue_render_job.apply_selected_RenderQueueConfig()")
 
