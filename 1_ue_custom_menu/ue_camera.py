@@ -70,12 +70,18 @@ def update_camera_settings(cine_cam_component) :
 
 
     # -------  max focal length --------
-    lens_settings = unreal.CameraLensSettings()
+    lens_settings                  = unreal.CameraLensSettings()
+    lens_settings.min_focal_length = 2
     lens_settings.max_focal_length = 20000
+    lens_settings.min_f_stop       = 0.1
+    lens_settings.max_f_stop       = 100
+
 
     # apply
     cine_cam_component.set_editor_property("lens_settings",lens_settings)
 
+    # lock in viewport
+    # actor_cam.editor_lock_location(True)
 
     # -------  sensor --------
     cine_cam_component.filmback.sensor_width  = resx

@@ -87,7 +87,6 @@ def create_level(hip_name, job_name) :
     spawned_seq  = unreal.EditorLevelLibrary.spawn_actor_from_object(asset_seq, location_seq, rotation_seq)
 
 
-
     # ------------  load json ----------------
     json_path = "Q:/_engine/_json/settings/seq." + hip_name + "." + job_name + ".json"
 

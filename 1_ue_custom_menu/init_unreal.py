@@ -10,5 +10,5 @@ if __name__ == '__main__':
 
 
 # ------------ lower idle GPU usage ------------
-# ------------   (not to be 100%)   ------------
-unreal.SystemLibrary.execute_console_command(None, "t.MaxFPS 60")
+# (not to be 100%)
+unreal.SystemLibrary.execute_console_command(None, "t.MaxFPS 30")
